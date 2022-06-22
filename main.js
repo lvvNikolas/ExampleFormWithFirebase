@@ -1,16 +1,18 @@
+
 // Initialize Firebase (ADD YOUR OWN DATA)
-var config = {
-  apiKey: "xxxxx",
-  authDomain: "xxxxx",
-  databaseURL: "xxxxx",
-  projectId: "xxxxx",
-  storageBucket: "xxxxx",
-  messagingSenderId: "xxxxx"
+const config = {
+  apiKey: "AIzaSyC8wk3rtsymkPJpQqxFDs29fLedxh_bZjA",
+  authDomain: "lvvcontactform.firebaseapp.com",
+  databaseURL: "https://lvvcontactform-default-rtdb.firebaseio.com",
+  projectId: "lvvcontactform",
+  storageBucket: "lvvcontactform.appspot.com",
+  appId: "1:250776191845:web:1ba83dad040b2344a5978c",
+  messagingSenderId: "G-JW1MJVQ7XQ"
 };
 firebase.initializeApp(config);
 
 // Reference messages collection
-var messagesRef = firebase.database().ref('messages');
+const messagesRef = firebase.database().ref('messages');
 
 // Listen for form submit
 document.getElementById('contactForm').addEventListener('submit', submitForm);
@@ -20,14 +22,15 @@ function submitForm(e){
   e.preventDefault();
 
   // Get values
-  var name = getInputVal('name');
-  var company = getInputVal('company');
-  var email = getInputVal('email');
-  var phone = getInputVal('phone');
-  var message = getInputVal('message');
+  const name = getInputVal('name');
+  const company = getInputVal('company');
+  const email = getInputVal('email');
+  const phone = getInputVal('phone');
+  const date = getInputVal('date');
+  const message = getInputVal('message');
 
   // Save message
-  saveMessage(name, company, email, phone, message);
+  saveMessage(name, company, email, phone, date, message);
 
   // Show alert
   document.querySelector('.alert').style.display = 'block';
@@ -47,13 +50,14 @@ function getInputVal(id){
 }
 
 // Save message to firebase
-function saveMessage(name, company, email, phone, message){
-  var newMessageRef = messagesRef.push();
+function saveMessage(name, company, email, phone, date, message){
+  const newMessageRef = messagesRef.push();
   newMessageRef.set({
     name: name,
     company:company,
     email:email,
     phone:phone,
+    date: date,
     message:message
   });
 }
